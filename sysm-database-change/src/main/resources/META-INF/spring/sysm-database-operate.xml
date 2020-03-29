@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<context:property-placeholder location="classpath:META-INF/spring/config.properties" />-->
+    <!--<context:property-placeholder location="file:/data12/bsm_plugins/script/config.properties" /> -->
+    <!--<context:property-placeholder location="file:/app/toptea-bpm-7.1-tj/conf/toptea.properties" />-->
+    <context:property-placeholder location="file:C:\Users\Administrator\Desktop\conf\toptea_sysm_98gz.properties" />
+    <!--<context:property-placeholder location="file:C:\Users\bin.ma\Documents\git\central\bsm-analy\busanaly-service\conf\toptea.properties" />-->
+
+
+    <!--oracle DataSource-->
+    <bean id="oracleDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass">
+            <value>${sysm.jdbc.driverClassName}</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>${sysm.jdbc.url}</value>
+        </property>
+        <property name="user">
+            <value>${sysm.jdbc.username}</value>
+        </property>
+        <property name="password">
+            <value>${sysm.jdbc.password}</value>
+        </property>
+        <property name="initialPoolSize">
+            <value>${sysm.db.initPoolSize}</value>
+        </property>
+        <property name="minPoolSize">
+            <value>${sysm.db.minPoolSize}</value>
+        </property>
+        <property name="maxPoolSize">
+            <value>${sysm.db.maxPoolSize}</value>
+        </property>
+        <property name="maxIdleTime">
+            <value>${sysm.db.maxIdleTime}</value>
+        </property>
+        <property name="acquireIncrement">
+            <value>${sysm.db.poolIncrement}</value>
+        </property>
+        <property name="maxStatements">
+            <value>0</value>
+        </property>
+    </bean>
+    <bean id="oracleJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="oracleDataSource" />
+    </bean>
+    <!--oracle datasource end-->
+</beans>
